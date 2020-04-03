@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "twitter"
+    }
+  },
+  "defaultProject": "twitter",
+  "cli": {
+    "analytics": "06e51efa-fe6c-4b3a-ae24-b0ec083f9723"
+  }
 }

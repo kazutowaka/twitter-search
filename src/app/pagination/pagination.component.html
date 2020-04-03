@@ -1,0 +1,34 @@
+<div *ngIf="pages > 1" class="pagination">
+  <a
+    *ngIf="page !== 0"
+    [routerLink]="['./']"
+    [queryParams]="{
+      q : query
+    }"
+    class="pagination-prev">
+    ＜
+  </a>
+  <ol class="pagination-items">
+    <li *ngFor="let index of pageArray" class="pagination-item">
+      <a
+        [routerLink]="['./']"
+        [queryParams]="{
+          q : query,
+          p: index === 1 ? null : index
+        }"
+        [class.is-current]="index === page + 1">
+        {{index}}
+      </a>
+    </li>
+  </ol>
+  <a
+    *ngIf="page !== pages - 1"
+    [routerLink]="['./']"
+    [queryParams]="{
+      q : query,
+      p: page + 2
+    }"
+    class="pagination-next">
+    ＞
+  </a>
+</div>

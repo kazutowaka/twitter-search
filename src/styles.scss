@@ -1,1 +1,253 @@
-/* You can add global styles to this file, and also import other style files */
+/* A Modern CSS Reset */
+*,*::before,*::after{box-sizing:border-box}ul[class],ol[class]{padding:0}body,h1,h2,h3,h4,p,ul[class],ol[class],figure,blockquote,dl,dd{margin:0}body{min-height:100vh;scroll-behavior:smooth;text-rendering:optimizeSpeed;line-height:1.5}ul[class],ol[class]{list-style:none}a:not([class]){text-decoration-skip-ink:auto}img{max-width:100%;display:block}article>*+*{margin-top:1em}input,button,textarea,select{font:inherit}img:not([alt]){filter:blur(10px)}@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}}
+
+$color-link: #2581a6;
+$color-gray: #a0a4a7;
+$border-color: #f1f1f1;
+
+@mixin mobile {
+  @media only screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background-color: #f8f8fa;
+  font-size: 1.2rem;
+  color: #3a3b3f;
+}
+
+a {
+  text-decoration: none;
+}
+
+.header {
+  padding: 25px 47px 0;
+  background-color: #fff;
+
+  @include mobile {
+    padding: 25px 20px 0;
+  }
+}
+
+.site-title {
+  font-weight: normal;
+  font-size: 2.6rem;
+}
+
+.nav {
+  padding: 15px 47px 0;
+  background-color: #fff;
+
+  @include mobile {
+    padding: 15px 20px 0;
+  }
+
+  &-inner {
+    display: flex;
+    height: 40px;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    font-weight: bold;
+    font-size: 1.5rem;
+
+    @include mobile {
+      flex: 1;
+    }
+
+    &.is-current {
+      background-color: #f8f8fa;
+      color: $color-link;
+    }
+
+    &:hover {
+      opacity: 0.6;
+
+      transition: opacity 0.4s;
+    }
+  }
+}
+
+.content {
+  padding: 25px 60px;
+
+  @include mobile {
+    padding: 20px 30px;
+  }
+}
+
+.page-title {
+  margin-bottom: 10px;
+  color: $color-gray;
+  font-weight: normal;
+  font-size: 1.7rem;
+}
+
+.search {
+  position: relative;
+  display: inline-block;
+  max-width: 356px;
+  width: 100%;
+  margin-bottom: 40px;
+
+  input[type=text] {
+    box-sizing: border-box;
+    padding: 10px 50px 10px 20px;
+    width: 100%;
+    height: 55px;
+    background-color: #fff;
+    border: 1px solid #d1d2d4;
+    border-radius: 2px;
+    font-size: 1.8rem;
+
+    &::placeholder {
+      color: $color-gray;
+    }
+  }
+
+  button[type=submit] {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    width: 22px;
+    height: 22px;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 0;
+
+    &:hover {
+      opacity: 0.6;
+
+      transition: opacity 0.4s;
+    }
+  }
+}
+
+.error {
+  font-size: 1.6rem;
+  color: #f00;
+}
+
+.results {
+  padding: 0 30px 50px;
+  background-color: #fff;
+  box-shadow: 0px 2px 2px 1px #e6e6e6;
+
+  @include mobile {
+    padding-bottom: 30px;
+  }
+
+  &-inner {
+    overflow: auto;
+  }
+
+  table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 900px;
+    margin-bottom: 74px;
+
+    @include mobile {
+      margin-bottom: 30px;
+    }
+
+    th {
+      box-sizing: border-box;
+      height: 60px;
+      padding: 0 10px;
+      text-align: left;
+      color: $color-gray;
+      font-weight: normal;
+      font-size: 1.8rem;
+    }
+
+    td {
+      padding: 25px 10px;
+      font-size: 1.8rem;
+      word-break: break-word;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+
+    thead {
+      border-bottom: 1px solid $border-color;
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid $border-color;
+      }
+    }
+
+    .likes,
+    .replies,
+    .retweets {
+      text-align: center;
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+
+  &-items {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 54px;
+    height: 54px;
+    border: 1px solid $border-color;
+    border-radius: 2px;
+    font-size: 1.8rem;
+    color: #000;
+
+    &.is-current {
+      background-color: #169dd7;
+      color: #fff;
+    }
+
+    &:hover {
+      opacity: 0.6;
+
+      transition: opacity 0.4s;
+    }
+  }
+
+  &-prev {
+    margin-right: 25px;
+  }
+
+  &-next {
+    margin-left: 25px;
+  }
+
+  &-item:not(:last-child) {
+    margin-right: 25px;
+  }
+}

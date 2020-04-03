@@ -1,0 +1,51 @@
+<h2 class="page-title">{{pageTitle}}</h2>
+
+<form action="" (submit)="onSubmit(input.value)" role="search" class="search">
+  <input #input type="text" name="" placeholder="{{placeholder}}">
+  <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 91.1 92.5" enable-background="new 0 0 91.1 92.5"><style type="text/css">.st0{display:none;} .st1{fill:#CCCCCC;}</style><image width="48" height="53" id="LM2xRg" transform="matrix(1.623 0 0 1.623 6.5 1.5)" overflow="visible" class="st0"/><path class="st1" d="M91.1 84.5l-30-30c4.3-5.8 6.9-12.8 6.9-20.5 0-18.8-15.3-34-34-34-18.8 0-34 15.2-34 34 0 18.7 15.2 34 34 34 7 0 13.4-2.1 18.8-5.7l30.3 30.3 8-8.1zm-82.6-50.5c0-14.1 11.4-25.5 25.5-25.5s25.5 11.4 25.5 25.5-11.5 25.5-25.5 25.5-25.5-11.5-25.5-25.5z"/></svg></button>
+</form>
+
+<p *ngIf="(twitterService.subject$ | async)?.error as error" class="error">{{ error }}</p>
+
+<div *ngIf="(twitterService.subject$ | async)?.pages as pages" class="results">
+  <div class="results-inner">
+    <table>
+      <colgroup>
+        <col style="width: 28.5%">
+        <col style="width: 8%">
+        <col style="width: 7.5%">
+        <col style="width: 10%">
+        <col style="width: 14%">
+        <col>
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="tweet">Tweet</th>
+          <th class="likes">Likes</th>
+          <th class="replies">Replies</th>
+          <th class="retweets">Retweets</th>
+          <th class="hashtags">Hashtags</th>
+          <th class="date">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of pages[pageNum]?.results">
+          <td class="tweet">{{item.text | truncate:50}}</td>
+          <td class="likes">{{item.likes || '-'}}</td>
+          <td class="replies">{{item.replies || '-'}}</td>
+          <td class="retweets">{{item.retweets || '-'}}</td>
+          <td class="hashtags">{{item.hashtags | hashtags}}</td>
+          <td class="date">{{item.date | date}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-pagination
+    [query]="query"
+    [pages]="pages.length"
+    [page]="pageNum">
+  </app-pagination>
+
+</div>
+
